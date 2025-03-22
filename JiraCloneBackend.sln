@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraCloneBackend", "JiraCloneBackend\JiraCloneBackend.csproj", "{DC7F784A-D63A-4D71-BB7A-94DD97B3CB4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC7F784A-D63A-4D71-BB7A-94DD97B3CB4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7F784A-D63A-4D71-BB7A-94DD97B3CB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7F784A-D63A-4D71-BB7A-94DD97B3CB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7F784A-D63A-4D71-BB7A-94DD97B3CB4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E60EBFA6-923A-47F4-8167-438C4071C09D}
+	EndGlobalSection
+EndGlobal
