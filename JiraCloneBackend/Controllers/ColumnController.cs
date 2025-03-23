@@ -80,6 +80,16 @@ namespace JiraCloneBackend.Controllers
 
             return NoContent();
         }
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateColumnTitle(int id, [FromBody] string title)
+        {
+            var column = await _context.Columns.FindAsync(id);
+            if (column == null) return NotFound();
+
+            column.Title = title;
+            await _context.SaveChangesAsync();
+            return Ok(column);
+        }
 
         // DELETE: api/Column/5
         [HttpDelete("{id}")]
