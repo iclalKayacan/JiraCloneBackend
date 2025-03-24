@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using JiraCloneBackend.Models;
 using JiraCloneBackend.Data;
+using JiraCloneBackend.Dto;
 
 namespace JiraCloneBackend.Controllers
 {
@@ -37,13 +38,23 @@ namespace JiraCloneBackend.Controllers
 
         // POST: api/TaskItem
         [HttpPost]
-        public async Task<ActionResult<TaskItem>> CreateTask(TaskItem task)
+        public async Task<ActionResult<TaskItem>> CreateTask(TaskItemCreateDto dto)
         {
+            var task = new TaskItem
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                Assignee = dto.Assignee,
+                CreatedAt = dto.CreatedAt,
+                ColumnId = dto.ColumnId
+            };
+
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTaskItem), new { id = task.Id }, task);
         }
+
 
         // PUT: api/TaskItem/5
         [HttpPut("{id}")]
