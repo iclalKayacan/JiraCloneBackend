@@ -79,6 +79,19 @@ namespace JiraCloneBackend.Controllers
 
             return NoContent();
         }
+        [HttpPatch("{id}/description")]
+        public async Task<IActionResult> UpdateDescription(int id, [FromBody] string newDescription)
+        {
+            var task = await _context.Tasks.FindAsync(id);
+            if (task == null)
+                return NotFound();
+
+            task.Description = newDescription;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
 
         // DELETE: api/TaskItem/5
         [HttpDelete("{id}")]
