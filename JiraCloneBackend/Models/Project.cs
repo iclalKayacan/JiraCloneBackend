@@ -9,6 +9,7 @@
         public DateTime EndDate { get; set; }
         public ICollection<Column> Columns { get; set; } = new List<Column>();
 
+        public ICollection<UserProject> UserProjects { get; set; }
 
     }
 }

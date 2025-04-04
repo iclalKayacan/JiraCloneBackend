@@ -18,5 +18,8 @@ namespace JiraCloneBackend.Models
 
         [Required]
         public string Role { get; set; } // "Admin", "ProjectOwner", "User"
+
+        public ICollection<UserProject> UserProjects { get; set; }
+
     }
 }

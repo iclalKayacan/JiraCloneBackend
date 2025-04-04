@@ -14,6 +14,8 @@ namespace JiraCloneBackend.Data
         public DbSet<TaskAttachment> TaskAttachments { get; set; }
         public DbSet<TaskItemAssignment> TaskItemAssignments { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserProject> UserProjects { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,7 +29,21 @@ namespace JiraCloneBackend.Data
                 .WithMany(t => t.TaskItemAssignments)
                 .HasForeignKey(t => t.TaskItemId);
 
-            
+            modelBuilder.Entity<UserProject>()
+                .HasKey(up => new { up.UserId, up.ProjectId });
+
+            modelBuilder.Entity<UserProject>()
+                .HasOne(up => up.User)
+                .WithMany(u => u.UserProjects)
+                .HasForeignKey(up => up.UserId);
+
+            modelBuilder.Entity<UserProject>()
+                .HasOne(up => up.Project)
+                .WithMany(p => p.UserProjects)
+                .HasForeignKey(up => up.ProjectId);
+
+            base.OnModelCreating(modelBuilder);
+
         }
 
 
