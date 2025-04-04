@@ -7,5 +7,8 @@
         public string? Assignee { get; set; }
         public DateTime CreatedAt { get; set; }
         public int ColumnId { get; set; }
+
+        public List<int> UserIds { get; set; }
+
     }
 }

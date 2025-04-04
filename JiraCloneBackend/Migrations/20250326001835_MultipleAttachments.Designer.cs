@@ -4,6 +4,7 @@ using JiraCloneBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JiraCloneBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250326001835_MultipleAttachments")]
+    partial class MultipleAttachments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,6 +114,9 @@ namespace JiraCloneBackend.Migrations
                     b.Property<string>("Assignee")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Attachment")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ColumnId")
                         .HasColumnType("int");
 
@@ -129,51 +135,6 @@ namespace JiraCloneBackend.Migrations
                     b.HasIndex("ColumnId");
 
                     b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("JiraCloneBackend.Models.TaskItemAssignment", b =>
-                {
-                    b.Property<int>("TaskItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TaskItemId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TaskItemAssignments");
-                });
-
-            modelBuilder.Entity("JiraCloneBackend.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("JiraCloneBackend.Models.Column", b =>
@@ -209,25 +170,6 @@ namespace JiraCloneBackend.Migrations
                     b.Navigation("Column");
                 });
 
-            modelBuilder.Entity("JiraCloneBackend.Models.TaskItemAssignment", b =>
-                {
-                    b.HasOne("JiraCloneBackend.Models.TaskItem", "TaskItem")
-                        .WithMany("TaskItemAssignments")
-                        .HasForeignKey("TaskItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("JiraCloneBackend.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TaskItem");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("JiraCloneBackend.Models.Column", b =>
                 {
                     b.Navigation("Tasks");
@@ -241,8 +183,6 @@ namespace JiraCloneBackend.Migrations
             modelBuilder.Entity("JiraCloneBackend.Models.TaskItem", b =>
                 {
                     b.Navigation("Attachments");
-
-                    b.Navigation("TaskItemAssignments");
                 });
 #pragma warning restore 612, 618
         }
