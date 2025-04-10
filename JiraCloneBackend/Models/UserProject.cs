@@ -7,5 +7,7 @@
 
         public int ProjectId { get; set; }
         public Project Project { get; set; }
+
+        public string ProjectRole { get; set; }
     }
 }

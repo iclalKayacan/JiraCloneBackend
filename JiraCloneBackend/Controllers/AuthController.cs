@@ -57,7 +57,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] LoginDto registerDto)
+    public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
         var existingUser = await _context.Users.AnyAsync(u => u.Email == registerDto.Email);
         if (existingUser) return BadRequest("User already exists.");
@@ -65,9 +65,9 @@ public class AuthController : ControllerBase
         var user = new User
         {
             Email = registerDto.Email,
-            Name = "Test User",
+            Name = registerDto.Name,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
-            Role = "Admin"
+            Role = "User" 
         };
 
         _context.Users.Add(user);
@@ -75,5 +75,7 @@ public class AuthController : ControllerBase
 
         return Ok("User created successfully.");
     }
+
+
 
 }
